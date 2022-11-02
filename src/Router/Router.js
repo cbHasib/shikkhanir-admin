@@ -1,5 +1,7 @@
 import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
+import AddNewCourse from "../Pages/Courses/AddNewCourse/AddNewCourse";
+import Courses from "../Pages/Courses/Courses/Courses";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -47,7 +49,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: <h2>Courses</h2>,
+        element: (
+          <PrivateRoute>
+            <Courses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/courses/add-new",
+        element: (
+          <PrivateRoute>
+            <AddNewCourse />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/instructors",
