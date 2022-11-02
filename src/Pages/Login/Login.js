@@ -1,8 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
+import { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
+  const { googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const navigate = useNavigate();
+
+  const googleHandle = () => {
+    googleLogin()
+      .then((result) => {
+        navigate(from, { replace: true });
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
       <div className="mx-auto h-full sm:w-max">
@@ -26,7 +39,10 @@ const Login = () => {
               Login to your account
             </h3>
             <div className="mt-12 flex flex-wrap sm:grid gap-6 grid-cols-2">
-              <button className="w-full h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700 hover:bg-gray-200">
+              <button
+                onClick={googleHandle}
+                className="w-full h-11 rounded-full border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700 hover:bg-gray-200"
+              >
                 <div className="w-max mx-auto flex items-center justify-center space-x-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
