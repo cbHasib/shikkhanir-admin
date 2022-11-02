@@ -9,11 +9,10 @@ const Categories = () => {
   const [categories, setCategories] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch(`${process.env.REACT_APP_SERVER_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data.data);
-        console.log(data);
         setLoad(false);
       })
       .catch((err) => console.error(err));
@@ -26,7 +25,12 @@ const Categories = () => {
     const _id = categories.length;
     const data = { _id, cat_name, cat_slug };
 
-    fetch("http://localhost:5000/category", {
+    if (!cat_name.length > 0) {
+      alert("Input a Category Name");
+      return;
+    }
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/category`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -103,38 +107,38 @@ const Categories = () => {
             </div>
 
             <div className="h-full w-fit flex items-center justify-center">
-              <div class="bg-white overflow-hidden overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                <table class="divide-y divide-gray-200 text-sm dark:divide-gray-700">
-                  <thead class="bg-purple-300  dark:bg-gray-800">
+              <div className="bg-white overflow-hidden overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                <table className="divide-y divide-gray-200 text-sm dark:divide-gray-700">
+                  <thead className="bg-purple-300  dark:bg-gray-800">
                     <tr>
-                      <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
+                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
                         ID
                       </th>
-                      <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
+                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
                         Name
                       </th>
-                      <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
+                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
                         Slug
                       </th>
-                      <th class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
+                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
                         Action
                       </th>
                     </tr>
                   </thead>
 
-                  <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     {categories?.map((category) => (
-                      <tr>
-                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+                      <tr key={category._id}>
+                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
                           {category._id}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
                           {category.cat_name}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
                           {category.cat_slug}
                         </td>
-                        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
                           Action
                         </td>
                       </tr>
