@@ -1,3 +1,4 @@
+import { Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
@@ -5,6 +6,7 @@ import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
 const Categories = () => {
   const [load, setLoad] = useState(true);
   const [refresh, setRefresh] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
 
   const [categories, setCategories] = useState({});
 
@@ -107,45 +109,38 @@ const Categories = () => {
             </div>
 
             <div className="h-full w-fit flex items-center justify-center">
-              <div className="bg-white overflow-hidden overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                <table className="divide-y divide-gray-200 text-sm dark:divide-gray-700">
-                  <thead className="bg-purple-300  dark:bg-gray-800">
-                    <tr>
-                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
-                        ID
-                      </th>
-                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
-                        Name
-                      </th>
-                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
-                        Slug
-                      </th>
-                      <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {categories?.map((category) => (
-                      <tr key={category._id}>
-                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                          {category._id}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
-                          {category.cat_name}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
-                          {category.cat_slug}
-                        </td>
-                        <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
-                          Action
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <Table>
+                <Table.Head>
+                  <Table.HeadCell>ID</Table.HeadCell>
+                  <Table.HeadCell>Category</Table.HeadCell>
+                  <Table.HeadCell>Slug</Table.HeadCell>
+                  <Table.HeadCell>
+                    <span className="sr-only">Edit</span>
+                  </Table.HeadCell>
+                </Table.Head>
+                <Table.Body className="divide-y">
+                  {categories?.map((category) => (
+                    <Table.Row
+                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                      key={category._id}
+                    >
+                      <Table.Cell> {category._id}</Table.Cell>
+                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                        {category.cat_name}
+                      </Table.Cell>
+                      <Table.Cell>{category.cat_slug}</Table.Cell>
+                      <Table.Cell>
+                        <Link
+                          to={`/update-category/${category._id}`}
+                          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                        >
+                          Edit
+                        </Link>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
             </div>
           </div>
         </>

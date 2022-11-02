@@ -1,4 +1,5 @@
 import Categories from "../Pages/Categories/Categories";
+import EditCategory from "../Pages/Categories/EditCategory";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Categories />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-category/:id",
+        element: (
+          <PrivateRoute>
+            <EditCategory />
           </PrivateRoute>
         ),
       },
