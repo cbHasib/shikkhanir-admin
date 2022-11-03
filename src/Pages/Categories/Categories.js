@@ -41,11 +41,42 @@ const Categories = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setLoad(true);
-        setRefresh(!refresh);
-        e.target.reset();
-      });
+        if (data.success) {
+          alert(data.message);
+          setRefresh(!refresh);
+          setLoad(true);
+          e.target.reset();
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const handleDelete = (id, name) => {
+    const userConfirmed = window.confirm(
+      `Are you sure to DELETE ${name} category from database?`
+    );
+
+    if (userConfirmed) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/delete-category/${id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message);
+            setRefresh(!refresh);
+            setLoad(true);
+          } else {
+            alert(data.error);
+          }
+        })
+        .catch((error) => alert(error.message));
+    }
   };
 
   return (
@@ -129,13 +160,21 @@ const Categories = () => {
                         {category.cat_name}
                       </Table.Cell>
                       <Table.Cell>{category.cat_slug}</Table.Cell>
-                      <Table.Cell>
+                      <Table.Cell className="flex gap-5">
                         <Link
                           to={`/update-category/${category._id}`}
                           className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                         >
                           Edit
                         </Link>
+                        <span
+                          onClick={() =>
+                            handleDelete(category._id, category.cat_name)
+                          }
+                          className="font-medium text-red-600 hover:underline dark:text-red-500 hover:cursor-pointer"
+                        >
+                          Delete
+                        </span>
                       </Table.Cell>
                     </Table.Row>
                   ))}

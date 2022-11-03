@@ -1,6 +1,7 @@
+import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
 
 const EditCategory = () => {
@@ -101,8 +102,11 @@ const EditCategory = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center items-center h-[70vh]">
+        <div className="flex flex-col gap-5 justify-center items-center h-[70vh]">
           <h2 className="text-4xl text-red-600">Category Not Found</h2>
+          <Link to="/categories">
+            <Button color="failure">Go Back</Button>
+          </Link>
         </div>
       )}
     </>

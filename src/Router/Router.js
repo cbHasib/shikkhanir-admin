@@ -2,6 +2,8 @@ import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
 import AddNewCourse from "../Pages/Courses/AddNewCourse/AddNewCourse";
 import Courses from "../Pages/Courses/Courses/Courses";
+import EditInstructor from "../Pages/Instructors/EditInstructor/EditInstructor";
+import InstructorParent from "../Pages/Instructors/InstructorParent";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/",
@@ -65,7 +71,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/instructors",
-        element: <h2>Instructors</h2>,
+        element: (
+          <PrivateRoute>
+            <InstructorParent />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/instructors/update-instructor/:id",
+        element: (
+          <PrivateRoute>
+            <EditInstructor />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/reports",

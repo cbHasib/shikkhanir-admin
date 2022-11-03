@@ -21,21 +21,21 @@ const AddNewCourse = () => {
         alert(error.message);
       });
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/instructors`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
-        setInstructors(data.data);
+        let categoriesData = data.data;
+        categoriesData.shift();
+        setCategories(categoriesData);
       })
       .catch((error) => {
         alert(error.message);
       });
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/categories`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/instructors`)
       .then((res) => res.json())
       .then((data) => {
-        const categoriesData = data.data;
-        categoriesData.shift();
-        setCategories(categoriesData);
+        setInstructors(data.data);
         setLoad(false);
       })
       .catch((error) => {
