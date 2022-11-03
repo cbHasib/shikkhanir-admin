@@ -41,12 +41,46 @@ const AddNewInstructor = () => {
       body: JSON.stringify(newData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-
-    setRefresh(!refresh);
-    reset();
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          setRefresh(!refresh);
+          setLoad(true);
+          reset();
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch((error) => alert(error.message));
   };
+
+  const handleDelete = (id, name) => {
+    const userConfirmed = window.confirm(
+      `Are you sure to DELETE ${name} from database?`
+    );
+
+    if (userConfirmed) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/delete-instructor/${id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ name: "Hasib" }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            alert(data.message);
+            setRefresh(!refresh);
+            setLoad(true);
+          } else {
+            alert(data.error);
+          }
+        })
+        .catch((error) => alert(error.message));
+    }
+  };
+
   return (
     <>
       {load ? (
@@ -185,13 +219,21 @@ const AddNewInstructor = () => {
                         {instructor.name}
                       </Table.Cell>
                       <Table.Cell>{instructor.instructor_slug}</Table.Cell>
-                      <Table.Cell>
+                      <Table.Cell className="flex gap-5 items-center justify-center">
                         <Link
                           to={`/instructors/update-instructor/${instructor._id}`}
                           className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                         >
                           Edit
                         </Link>
+                        <span
+                          onClick={() =>
+                            handleDelete(instructor?._id, instructor?.name)
+                          }
+                          className="font-medium text-red-600 hover:underline dark:text-red-500 hover:cursor-pointer"
+                        >
+                          Delete
+                        </span>
                       </Table.Cell>
                     </Table.Row>
                   ))}

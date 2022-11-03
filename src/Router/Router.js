@@ -2,6 +2,7 @@ import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
 import AddNewCourse from "../Pages/Courses/AddNewCourse/AddNewCourse";
 import Courses from "../Pages/Courses/Courses/Courses";
+import EditCourse from "../Pages/Courses/EditCourse/EditCourse";
 import EditInstructor from "../Pages/Instructors/EditInstructor/EditInstructor";
 import InstructorParent from "../Pages/Instructors/InstructorParent";
 import Login from "../Pages/Login/Login";
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddNewCourse />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/courses/update-course/:id",
+        element: (
+          <PrivateRoute>
+            <EditCourse />
           </PrivateRoute>
         ),
       },

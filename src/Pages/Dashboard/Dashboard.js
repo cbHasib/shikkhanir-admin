@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../Context/UserContext";
+import React from "react";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <div>
       Dashboard
