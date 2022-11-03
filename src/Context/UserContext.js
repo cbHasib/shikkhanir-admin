@@ -32,7 +32,9 @@ const UserContext = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const userInfo = { user, loading, setLoading, googleLogin, logout };

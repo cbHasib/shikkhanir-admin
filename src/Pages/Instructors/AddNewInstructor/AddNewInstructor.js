@@ -65,7 +65,6 @@ const AddNewInstructor = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ name: "Hasib" }),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -219,21 +218,23 @@ const AddNewInstructor = () => {
                         {instructor.name}
                       </Table.Cell>
                       <Table.Cell>{instructor.instructor_slug}</Table.Cell>
-                      <Table.Cell className="flex gap-5 items-center justify-center">
-                        <Link
-                          to={`/instructors/update-instructor/${instructor._id}`}
-                          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                        >
-                          Edit
-                        </Link>
-                        <span
-                          onClick={() =>
-                            handleDelete(instructor?._id, instructor?.name)
-                          }
-                          className="font-medium text-red-600 hover:underline dark:text-red-500 hover:cursor-pointer"
-                        >
-                          Delete
-                        </span>
+                      <Table.Cell>
+                        <div className="flex gap-5">
+                          <Link
+                            to={`/instructors/update-instructor/${instructor._id}`}
+                            className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                          >
+                            Edit
+                          </Link>
+                          <span
+                            onClick={() =>
+                              handleDelete(instructor?._id, instructor?.name)
+                            }
+                            className="font-medium text-red-600 hover:underline dark:text-red-500 hover:cursor-pointer"
+                          >
+                            Delete
+                          </span>
+                        </div>
                       </Table.Cell>
                     </Table.Row>
                   ))}

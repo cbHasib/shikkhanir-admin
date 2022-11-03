@@ -1,23 +1,25 @@
 import { Button } from "flowbite-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import ShowCourses from "../ShowCourses/ShowCourses";
 
 const Courses = () => {
   return (
-    <div>
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="w-[80%] mx-auto flex flex-col gap-5">
+      <div className="fixed left-[17%] flex flex-col gap-1">
         <Link to="/courses/add-new">
           <Button outline={true} gradientDuoTone="purpleToBlue">
             Add New Course
           </Button>
         </Link>
-
-        <Link to="/courses/update-course/1">
+        <Link to="/courses/add-new">
           <Button outline={true} gradientDuoTone="pinkToOrange">
-            Update Course
+            Add Course Content
           </Button>
         </Link>
       </div>
+
+      <ShowCourses />
     </div>
   );
 };
