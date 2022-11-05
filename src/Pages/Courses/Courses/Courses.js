@@ -12,7 +12,7 @@ const Courses = () => {
             Add New Course
           </Button>
         </Link>
-        <Link to="/courses/add-new">
+        <Link to="/courses/add-course-content">
           <Button outline={true} gradientDuoTone="pinkToOrange">
             Add Course Content
           </Button>
