@@ -1,3 +1,9 @@
+import AddNewBlog from "../Pages/Blogs/AddNewBlog/AddNewBlog";
+import AddNewBlogAuthor from "../Pages/Blogs/BlogAuthor/AddNewBlogAuthor";
+import UpdateBlogAuthor from "../Pages/Blogs/BlogAuthor/UpdateBlogAuthor";
+import AddNewBlogCategory from "../Pages/Blogs/BlogCategory/AddNewBlogCategory";
+import UpdateBlogCategory from "../Pages/Blogs/BlogCategory/UpdateBlogCategory";
+import ManageBlog from "../Pages/Blogs/ManageBlog/ManageBlog";
 import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
 import AddCourseContent from "../Pages/Courses/AddCourseContent/AddCourseContent";
@@ -109,7 +115,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <h2>Blogs</h2>,
+        element: <ManageBlog />,
+      },
+      {
+        path: "/blogs/add-new-blog",
+        element: <AddNewBlog />,
+      },
+      {
+        path: "/blogs/add-author",
+        element: <AddNewBlogAuthor />,
+      },
+      {
+        path: "/blogs/update-author/:id",
+        element: <UpdateBlogAuthor />,
+      },
+      {
+        path: "/blogs/add-category",
+        element: <AddNewBlogCategory />,
+      },
+      {
+        path: "/blogs/update-category/:id",
+        element: <UpdateBlogCategory />,
       },
     ],
   },
