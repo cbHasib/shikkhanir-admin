@@ -5,30 +5,49 @@ import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 const AddNewBlog = () => {
   const [load, setLoad] = useState(true);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, setValue } = useForm();
   const [authors, setAuthors] = useState([]);
   const [categories, setCategories] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/blog-categories`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data.data);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+  const [catName, setCatName] = useState("");
+  const [blogTitle, setBlogTitle] = useState("");
 
+  const [testSlug, setTestSlug] = useState("");
+
+  useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/authors`)
       .then((res) => res.json())
       .then((data) => {
-        setAuthors(data.data);
+        if (data.success) {
+          setAuthors(data.data);
+        } else {
+          console.log(data.error);
+        }
         setLoad(false);
       })
       .catch((error) => {
         alert(error.message);
       });
+    setLoad(false);
+  }, [refresh]);
+
+  useEffect(() => {
+    setLoad(true);
+    fetch(`${process.env.REACT_APP_SERVER_URL}/blog-categories`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setCategories(data.data);
+        } else {
+          console.log(data.error);
+        }
+        setLoad(false);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    setLoad(false);
   }, [refresh]);
 
   // Date
@@ -38,23 +57,22 @@ const AddNewBlog = () => {
 
   const handleAddBlog = (data) => {
     setLoad(true);
-    const { title, author, postCategory } = data;
+    const { author, postCategory } = data;
 
     const authorName = author.split(";")[0];
     const author_id = author.split(";")[1];
     const postCatName = postCategory.split(";")[0];
     const cat_id = postCategory.split(";")[1];
 
-    const slug = `${postCatName.toLowerCase().split(" ").join("-")}/${title
+    /*     const slug = `${postCatName.toLowerCase().split(" ").join("-")}/${title
       .toLowerCase()
       .split(" ")
-      .join("-")}`;
+      .join("-")}`; */
 
     data.author = authorName;
     data["author_id"] = author_id;
     data["cat_id"] = cat_id;
     data.postCategory = postCatName;
-    data["slug"] = slug;
 
     fetch(`${process.env.REACT_APP_SERVER_URL}/add-new-blog`, {
       method: "POST",
@@ -80,6 +98,18 @@ const AddNewBlog = () => {
       });
   };
 
+  useEffect(() => {
+    const slug = `${catName
+      .split(";")[0]
+      .toLowerCase()
+      .split(" ")
+      .join("-")}/${blogTitle.toLowerCase().split(" ").join("-")}`;
+
+    setTestSlug(slug);
+
+    setValue("slug", slug);
+  }, [catName, blogTitle, setValue]);
+
   return (
     <>
       {load ? (
@@ -102,6 +132,7 @@ const AddNewBlog = () => {
                   placeholder="What is the blog title?"
                   required={true}
                   shadow={true}
+                  onChange={(e) => setBlogTitle(e.target.value)}
                 />
               </div>
             </div>
@@ -136,6 +167,7 @@ const AddNewBlog = () => {
                   {...register("postCategory", {
                     required: true,
                   })}
+                  onBlur={(e) => setCatName(e.target.value)}
                 >
                   {categories?.map((category) => (
                     <option
@@ -173,7 +205,24 @@ const AddNewBlog = () => {
             <div>
               <div>
                 <div className="mb-2 block w-full">
-                  <Label htmlFor="thumbnail" value="Course Thumbnail" />
+                  <Label htmlFor="slug" value="Blog Slug" />
+                </div>
+                <TextInput
+                  {...register("slug")}
+                  id="slug"
+                  type="text"
+                  placeholder="web-development/what-is-web-development"
+                  required={true}
+                  shadow={true}
+                  defaultValue={testSlug}
+                />
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <div className="mb-2 block w-full">
+                  <Label htmlFor="thumbnail" value="Blog Thumbnail" />
                 </div>
                 <TextInput
                   {...register("thumbnail")}
