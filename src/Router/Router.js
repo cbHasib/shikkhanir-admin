@@ -7,6 +7,7 @@ import ManageBlog from "../Pages/Blogs/ManageBlog/ManageBlog";
 import UpdateBlog from "../Pages/Blogs/UpdateBlog/UpdateBlog";
 import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
+import Contact from "../Pages/Contact/Contact";
 import AddCourseContent from "../Pages/Courses/AddCourseContent/AddCourseContent";
 import AddNewCourse from "../Pages/Courses/AddNewCourse/AddNewCourse";
 import Courses from "../Pages/Courses/Courses/Courses";
@@ -111,8 +112,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/reports",
-        element: <h2>Reports</h2>,
+        path: "/contacts",
+        element: <Contact />,
+      },
+      {
+        path: "/contacts/view-contact/:id",
+        element: <Contact />,
       },
       {
         path: "/blogs",

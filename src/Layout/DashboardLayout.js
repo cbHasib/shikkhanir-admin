@@ -191,7 +191,7 @@ const DashboardLayout = () => {
             </li>
             <li>
               <NavLink
-                to="/reports"
+                to="/contacts"
                 className={({ isActive }) =>
                   isActive
                     ? "relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
@@ -214,7 +214,7 @@ const DashboardLayout = () => {
                   />
                 </svg>
                 <span className="group-hover:text-gray-700 dark:group-hover:text-gray-50">
-                  Reports
+                  Contact
                 </span>
               </NavLink>
             </li>
