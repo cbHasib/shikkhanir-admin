@@ -13,7 +13,7 @@ const AddNewBlog = () => {
   const [catName, setCatName] = useState("");
   const [blogTitle, setBlogTitle] = useState("");
 
-  const [testSlug, setTestSlug] = useState("");
+  const [slugMake, setSlugMake] = useState("");
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/authors`)
@@ -105,7 +105,7 @@ const AddNewBlog = () => {
       .split(" ")
       .join("-")}/${blogTitle.toLowerCase().split(" ").join("-")}`;
 
-    setTestSlug(slug);
+    setSlugMake(slug);
 
     setValue("slug", slug);
   }, [catName, blogTitle, setValue]);
@@ -214,7 +214,7 @@ const AddNewBlog = () => {
                   placeholder="web-development/what-is-web-development"
                   required={true}
                   shadow={true}
-                  defaultValue={testSlug}
+                  defaultValue={slugMake}
                 />
               </div>
             </div>

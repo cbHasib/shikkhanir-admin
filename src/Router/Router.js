@@ -4,6 +4,7 @@ import UpdateBlogAuthor from "../Pages/Blogs/BlogAuthor/UpdateBlogAuthor";
 import AddNewBlogCategory from "../Pages/Blogs/BlogCategory/AddNewBlogCategory";
 import UpdateBlogCategory from "../Pages/Blogs/BlogCategory/UpdateBlogCategory";
 import ManageBlog from "../Pages/Blogs/ManageBlog/ManageBlog";
+import UpdateBlog from "../Pages/Blogs/UpdateBlog/UpdateBlog";
 import Categories from "../Pages/Categories/Categories";
 import EditCategory from "../Pages/Categories/EditCategory";
 import AddCourseContent from "../Pages/Courses/AddCourseContent/AddCourseContent";
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
       {
         path: "/blogs/add-new-blog",
         element: <AddNewBlog />,
+      },
+      {
+        path: "/blogs/update-blog/:id",
+        element: <UpdateBlog />,
       },
       {
         path: "/blogs/add-author",
