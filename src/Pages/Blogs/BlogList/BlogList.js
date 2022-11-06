@@ -14,7 +14,7 @@ const BlogList = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setBlogs(data.data);
+          setBlogs(data.data.reverse());
           setLoad(false);
         } else {
           alert(data.error);
@@ -31,7 +31,7 @@ const BlogList = () => {
     );
 
     if (userConfirmed) {
-      fetch(`http://localhost:5000/delete-blog/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/delete-blog/${id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -63,6 +63,7 @@ const BlogList = () => {
                 <Table.HeadCell>Image</Table.HeadCell>
                 <Table.HeadCell>Title</Table.HeadCell>
                 <Table.HeadCell>Slug</Table.HeadCell>
+                <Table.HeadCell>Published</Table.HeadCell>
                 <Table.HeadCell>Post Category</Table.HeadCell>
                 <Table.HeadCell>Author</Table.HeadCell>
                 <Table.HeadCell>
@@ -82,6 +83,7 @@ const BlogList = () => {
                       {blog.title}
                     </Table.Cell>
                     <Table.Cell>{blog.slug}</Table.Cell>
+                    <Table.Cell>{blog.publishDate}</Table.Cell>
                     <Table.Cell>{blog.postCategory}</Table.Cell>
                     <Table.Cell>{blog.author}</Table.Cell>
                     <Table.Cell>

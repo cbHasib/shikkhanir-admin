@@ -18,7 +18,7 @@ const UpdateBlog = () => {
   const id = useParams().id;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/get-single-blog/${id}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/get-single-blog/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -84,7 +84,7 @@ const UpdateBlog = () => {
     data["cat_id"] = cat_id;
     data.postCategory = postCatName;
 
-    fetch(`http://localhost:5000/update-blog/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/update-blog/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
