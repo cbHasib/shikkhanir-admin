@@ -96,8 +96,14 @@ const Dashboard = () => {
               </div>
 
               <div className="flex flex-col justify-start">
-                <p className="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
-                  {courseCount}
+                <p
+                  className={
+                    courseCount
+                      ? "text-gray-800 text-4xl text-left dark:text-white font-bold my-4"
+                      : "h-11 bg-gray-200 rounded dark:bg-gray-700 w-15 mb-4 animate-pulse my-4"
+                  }
+                >
+                  {courseCount ? courseCount : null}
                 </p>
                 <div className="relative w-full h-2 bg-gray-200 rounded">
                   <div className="absolute top-0 h-2  left-0 rounded bg-green-500 w-full"></div>
@@ -126,8 +132,14 @@ const Dashboard = () => {
               </div>
 
               <div className="flex flex-col justify-start">
-                <p className="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
-                  {videoCount}
+                <p
+                  className={
+                    videoCount
+                      ? "text-gray-800 text-4xl text-left dark:text-white font-bold my-4"
+                      : "h-11 bg-gray-200 rounded dark:bg-gray-700 w-15 mb-4 animate-pulse my-4"
+                  }
+                >
+                  {videoCount ? videoCount : null}
                 </p>
                 <div className="relative w-full h-2 bg-gray-200 rounded">
                   <div className="absolute top-0 h-2  left-0 rounded bg-green-500 w-full"></div>
@@ -156,8 +168,14 @@ const Dashboard = () => {
               </div>
 
               <div className="flex flex-col justify-start">
-                <p className="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
-                  {instructorCount}
+                <p
+                  className={
+                    instructorCount
+                      ? "text-gray-800 text-4xl text-left dark:text-white font-bold my-4"
+                      : "h-11 bg-gray-200 rounded dark:bg-gray-700 w-15 mb-4 animate-pulse my-4"
+                  }
+                >
+                  {instructorCount ? instructorCount : null}
                 </p>
                 <div className="relative w-full h-2 bg-gray-200 rounded">
                   <div className="absolute top-0 h-2  left-0 rounded bg-green-500 w-full"></div>
@@ -186,8 +204,14 @@ const Dashboard = () => {
               </div>
 
               <div className="flex flex-col justify-start">
-                <p className="text-gray-800 text-4xl text-left dark:text-white font-bold my-4">
-                  {blogCount}
+                <p
+                  className={
+                    blogCount
+                      ? "text-gray-800 text-4xl text-left dark:text-white font-bold my-4"
+                      : "h-11 bg-gray-200 rounded dark:bg-gray-700 w-15 mb-4 animate-pulse my-4"
+                  }
+                >
+                  {blogCount ? blogCount : null}
                 </p>
                 <div className="relative w-full h-2 bg-gray-200 rounded">
                   <div className="absolute top-0 h-2  left-0 rounded bg-green-500 w-full"></div>
